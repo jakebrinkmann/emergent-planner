@@ -1,6 +1,8 @@
 # emergent-planner
 Daily task planner &amp; project tracker
 
+> Getting even three things done on purpose is hard enough. 
+
 * Segment days into 15-minute chunks
 * Plan out 3 major activities (room for more if necessary)
 * Track the time for each project by filling in the squares
@@ -8,9 +10,7 @@ Daily task planner &amp; project tracker
 
 ![Screenshot](Screenshot.png)
 
-Based off @daveseah [Productivity Tools](http://davidseah.com/node/the-emergent-task-planner/):
-
-> Getting even three things done on purpose is hard enough. 
+Based off (@daveseah) [Productivity Tools](http://davidseah.com/node/the-emergent-task-planner/):
 
 1. Start: Fill in today's date at the top of the form. Number the hours (starting at 8 if 8AM)
 2. Optional: Every four hours, schedule an hour break
