@@ -10,7 +10,7 @@ Daily task planner &amp; project tracker
 
 ![Screenshot](Screenshot.png)
 
-Based off (@daveseah) [Productivity Tools](http://davidseah.com/node/the-emergent-task-planner/):
+Based off [@daveseah](https://github.com/daveseah/) [Productivity Tools](http://davidseah.com/node/the-emergent-task-planner/):
 
 1. Start: Fill in today's date at the top of the form. Number the hours (starting at 8 if 8AM)
 2. Optional: Every four hours, schedule an hour break
