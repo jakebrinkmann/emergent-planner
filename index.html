@@ -178,10 +178,13 @@
       function stopCounting() {
         clearTimeout(amCounting);
         workTime = 0;
+        bricksDone = 0;
         $('.bs-work-modal').modal('hide');
         var t = document.getElementById("workModalBody");
         t.innerHTML = 'Working...';
         amCounting = false;
+        var br = document.createElement("BR");
+        document.getElementById("workLog").appendChild(br);
       }
 
       /* Get user confirmation to discard changes */
