@@ -88,6 +88,10 @@
       console.log(now);
       $('#date').html(now.format('MM/DD/YYYY'));
 
+      $('.bs-task-modal').on('shown.bs.modal', function () {
+          $('#taskInput').focus();
+      });
+
       function openTaskModal() { $('.bs-task-modal').modal('show')};
 
       function addItem() {
