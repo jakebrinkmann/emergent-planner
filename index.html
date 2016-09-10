@@ -50,7 +50,7 @@
         <h1> <span id='date'></span></h1>
       </div>
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-5" id="workLog">
 
         </div>
         <div class="col-sm-5">
@@ -131,12 +131,14 @@
 
       /* Start timer if user clicks a list item */
       var amCounting = false;
+      var workingOn = "";
       document.querySelector("body").addEventListener('click', function(event) {
         if (event.target.className === 'list-group-item') {
           var h = document.getElementById("workModalTitle");
           $('.bs-work-modal').modal('show');
           if (!amCounting) {
-            h.innerHTML = event.target.text;
+            workingOn = event.target.text;
+            h.innerHTML = workingOn;
             amCounting = setInterval(countUp, 1000); }
         };
       })
@@ -154,10 +156,23 @@
       }
 
       var workTime = 0;
+      var bricksDone = 0;
       function countUp() {
         var t = document.getElementById("workModalBody");
         workTime ++;
         t.innerHTML = workTime.toHHMMSS();
+        var blockSize = 900 //900 seconds is 15mins
+        if ((workTime - (bricksDone * blockSize)) > blockSize) {
+          bricksDone ++;
+          var s = document.createElement("SPAN")
+          s.className = "label label-default"
+          s.innerHTML = now.format('h:mma') + ': ' + workingOn;
+          document.getElementById("workLog").appendChild(s);
+          if(!(bricksDone % 4)) { // Group blocks by 4 (4*15min = 1hr)
+            var br = document.createElement("BR");
+            document.getElementById("workLog").appendChild(br);
+          }
+        }
       }
 
       function stopCounting() {
