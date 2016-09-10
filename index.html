@@ -52,8 +52,8 @@
 
         </div>
         <div class="col-sm-5">
-          <ol id="taskList">
-          </ol>
+          <div class="list-group" id="taskList">
+          </div>
         </div>
       </div>
     </div>
@@ -95,14 +95,16 @@
       function openTaskModal() { $('.bs-task-modal').modal('show')};
 
       function addItem() {
-        var li = document.createElement("li");
-        var inputValue = document.getElementById("taskInput").value;
-        var t = document.createTextNode(inputValue);
-        li.appendChild(t);
-        if (inputValue === '') {
+        var a = document.createElement("a");
+        var taskName = document.getElementById("taskInput").value;
+        var t = document.createTextNode(taskName);
+        a.appendChild(t);
+        a.className = "list-group-item";
+        a.href = "#";
+        if (taskName === '') {
           alert("You must write something!");
         } else {
-          document.getElementById("taskList").appendChild(li);
+          document.getElementById("taskList").appendChild(a);
         }
         document.getElementById("taskInput").value = "";
       };
