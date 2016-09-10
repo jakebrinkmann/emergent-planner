@@ -68,7 +68,13 @@
             <h4 class="modal-title">What do you want to work on:</h4>
           </div>
           <div class="modal-body">
-            <input type="text" id="taskInput" class="form-control" placeholder="Task...">
+            <input type="text" id="taskInput" class="form-control" placeholder="Task..."
+            onkeydown = "if (event.keyCode == 13)
+                        document.getElementById('addButton').click()">
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            <button type="button" class="btn btn-success" onclick="addItem()" id="addButton" data-dismiss="modal">Save changes</button>
           </div>
         </div>
       </div>
@@ -83,6 +89,19 @@
       $('#date').html(now.format('MM/DD/YYYY'));
 
       function openTaskModal() { $('.bs-task-modal').modal('show')};
+
+      function addItem() {
+        var li = document.createElement("li");
+        var inputValue = document.getElementById("taskInput").value;
+        var t = document.createTextNode(inputValue);
+        li.appendChild(t);
+        if (inputValue === '') {
+          alert("You must write something!");
+        } else {
+          document.getElementById("taskList").appendChild(li);
+        }
+        document.getElementById("taskInput").value = "";
+      };
     </script>
   </body>
 </html>
