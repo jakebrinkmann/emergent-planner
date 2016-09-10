@@ -92,7 +92,7 @@
             Working...
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Done</button>
+            <button type="button" class="btn btn-primary" onClick="stopCounting()">Done</button>
           </div>
         </div>
       </div>
@@ -130,13 +130,13 @@
       };
 
       /* Start timer if user clicks a list item */
+      var amCounting;
       document.querySelector("body").addEventListener('click', function(event) {
         if (event.target.className === 'list-group-item') {
           var h = document.getElementById("workModalTitle");
-          console.log(h);
           h.innerHTML = event.target.text;
           $('.bs-work-modal').modal('show');
-          setInterval(countUp, 1000);
+          amCounting = setInterval(countUp, 1000);
         };
       })
 
@@ -145,6 +145,15 @@
         var t = document.getElementById("workModalBody");
         workTime ++;
         t.innerHTML = workTime + ' seconds.';
+      }
+
+      function stopCounting() {
+        console.log('here');
+        clearTimeout(amCounting);
+        workTime = 0;
+        $('.bs-work-modal').modal('hide');
+        var t = document.getElementById("workModalBody");
+        t.innerHTML = 'Working...';
       }
 
       /* Get user confirmation to discard changes */
