@@ -88,7 +88,7 @@
           <div class="modal-header">
             <h4 class="modal-title" id="workModalTitle"></h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body" id="workModalBody">
             Working...
           </div>
           <div class="modal-footer">
@@ -136,8 +136,16 @@
           console.log(h);
           h.innerHTML = event.target.text;
           $('.bs-work-modal').modal('show');
+          setInterval(countUp, 1000);
         };
       })
+
+      var workTime = 0;
+      function countUp() {
+        var t = document.getElementById("workModalBody");
+        workTime ++;
+        t.innerHTML = workTime + ' seconds.';
+      }
 
       /* Get user confirmation to discard changes */
       window.onload = function() {
