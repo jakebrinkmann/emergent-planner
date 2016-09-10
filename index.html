@@ -96,6 +96,7 @@
 
       function openTaskModal() { $('.bs-task-modal').modal('show')};
 
+      var isDirty = false;
       function addItem() {
         var a = document.createElement("a");
         var taskName = document.getElementById("taskInput").value;
@@ -107,8 +108,26 @@
           alert("You must write something!");
         } else {
           document.getElementById("taskList").appendChild(a);
+          isDirty = true;
         }
         document.getElementById("taskInput").value = "";
+      };
+
+      /* Start timer if user clicks a list item */
+      document.querySelector("body").addEventListener('click', function(event) {
+        if (event.target.className === 'list-group-item') {
+          alert(event.target.text);
+        };
+      })
+
+      /* Get user confirmation to discard changes */
+      window.onload = function() {
+      window.addEventListener("beforeunload", function(e) {
+          var confirmationMessage;
+          if(!isDirty) { return undefined; };
+          (e || window.event).returnValue = confirmationMessage; //Gecko + IE
+          return confirmationMessage; //Gecko + Webkit, Safari, Chrome etc.
+      });
       };
     </script>
   </body>
