@@ -82,6 +82,22 @@
       </div>
     </div>
 
+    <div class="modal fade bs-work-modal" tabindex="-1" role="dialog" aria-labelledby="workModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="workModalTitle"></h4>
+          </div>
+          <div class="modal-body">
+            Working...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary">Done</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
     <script src="//getbootstrap.com/dist/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js"></script>
@@ -116,7 +132,10 @@
       /* Start timer if user clicks a list item */
       document.querySelector("body").addEventListener('click', function(event) {
         if (event.target.className === 'list-group-item') {
-          alert(event.target.text);
+          var h = document.getElementById("workModalTitle");
+          console.log(h);
+          h.innerHTML = event.target.text;
+          $('.bs-work-modal').modal('show');
         };
       })
 
