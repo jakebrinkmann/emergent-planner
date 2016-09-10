@@ -1,6 +1,8 @@
 # emergent-planner
 Daily task planner &amp; project tracker
 
+![GIF](emergent-planner.gif)
+
 > Getting even three things done on purpose is hard enough. 
 
 * Segment days into 15-minute chunks

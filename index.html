@@ -50,7 +50,7 @@
         <h1> <span id='date'></span></h1>
       </div>
       <div class="row">
-        <div class="col-sm-5">
+        <div class="col-sm-5" id="workLog">
 
         </div>
         <div class="col-sm-5">
@@ -77,6 +77,22 @@
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
             <button type="button" class="btn btn-success" onclick="addItem()" id="addButton" data-dismiss="modal">Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="modal fade bs-work-modal" tabindex="-1" role="dialog" aria-labelledby="workModal">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title" id="workModalTitle"></h4>
+          </div>
+          <div class="modal-body" id="workModalBody">
+            Working...
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" onClick="stopCounting()">Done</button>
           </div>
         </div>
       </div>
@@ -114,11 +130,59 @@
       };
 
       /* Start timer if user clicks a list item */
+      var amCounting = false;
+      var workingOn = "";
       document.querySelector("body").addEventListener('click', function(event) {
         if (event.target.className === 'list-group-item') {
-          alert(event.target.text);
+          var h = document.getElementById("workModalTitle");
+          $('.bs-work-modal').modal('show');
+          if (!amCounting) {
+            workingOn = event.target.text;
+            h.innerHTML = workingOn;
+            amCounting = setInterval(countUp, 1000); }
         };
       })
+
+      /* Convert seconds to HH:MM:SS format */
+      Number.prototype.toHHMMSS = function () {
+          var hours   = Math.floor(this / 3600);
+          var minutes = Math.floor((this - (hours * 3600)) / 60);
+          var seconds = this - (hours * 3600) - (minutes * 60);
+
+          if (hours   < 10) {hours   = "0"+hours;}
+          if (minutes < 10) {minutes = "0"+minutes;}
+          if (seconds < 10) {seconds = "0"+seconds;}
+          return hours+':'+minutes+':'+seconds;
+      }
+
+      var workTime = 0;
+      var bricksDone = 0;
+      function countUp() {
+        var t = document.getElementById("workModalBody");
+        workTime ++;
+        t.innerHTML = workTime.toHHMMSS();
+        var blockSize = 900 //900 seconds is 15mins
+        if ((workTime - (bricksDone * blockSize)) > blockSize) {
+          bricksDone ++;
+          var s = document.createElement("SPAN")
+          s.className = "label label-default"
+          s.innerHTML = now.format('h:mma') + ': ' + workingOn;
+          document.getElementById("workLog").appendChild(s);
+          if(!(bricksDone % 4)) { // Group blocks by 4 (4*15min = 1hr)
+            var br = document.createElement("BR");
+            document.getElementById("workLog").appendChild(br);
+          }
+        }
+      }
+
+      function stopCounting() {
+        clearTimeout(amCounting);
+        workTime = 0;
+        $('.bs-work-modal').modal('hide');
+        var t = document.getElementById("workModalBody");
+        t.innerHTML = 'Working...';
+        amCounting = false;
+      }
 
       /* Get user confirmation to discard changes */
       window.onload = function() {
