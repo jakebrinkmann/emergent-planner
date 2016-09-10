@@ -113,6 +113,13 @@
         document.getElementById("taskInput").value = "";
       };
 
+      /* Start timer if user clicks a list item */
+      document.querySelector("body").addEventListener('click', function(event) {
+        if (event.target.className === 'list-group-item') {
+          alert(event.target.text);
+        };
+      })
+
       /* Get user confirmation to discard changes */
       window.onload = function() {
       window.addEventListener("beforeunload", function(e) {
